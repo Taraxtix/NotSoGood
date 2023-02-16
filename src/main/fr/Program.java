@@ -29,8 +29,8 @@ public record Program(List<Op> ops) {
         }
     }
 
-    public void compile() {
-        File file = new File("../generated/test.asm");
+    public void compile(String filepath) {
+        File file = new File(filepath);
         FileWriter writer;
         try {
             writer = new FileWriter(file);
