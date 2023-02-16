@@ -34,7 +34,7 @@ public class NotSoGood {
         if (option.equals("sim")) {
             program.simulate();
         } else if (option.contains("com")) {
-            program.compile();
+            program.compile(program_path);
             ProcessBuilder processBuilder = new ProcessBuilder();
             try {
                 processBuilder.command("bash", "-c", "nasm -f elf64 -o "+ fileBaseName +".o "+ fileBaseName +".asm").start();
