@@ -15,6 +15,7 @@ import static java.lang.System.exit;
 public class Lexer {
     private static ArrayList<Token> parseTokenFromFile(String filePath) {
         assert TokenType.values().length == 2 : "Exhaustive handling of TokenType in compileContentToTokens";
+        ArrayList<Token> tokens = new ArrayList<>();
 
         String fileContent = null;
         try{
@@ -24,34 +25,25 @@ public class Lexer {
             exit(1);
         }
 
-        ArrayList<Token> tokens = new ArrayList<>();
-        int line = 0;
-        int column = 0;
-        int start = 0;
+        Object[] lines = fileContent.lines().toArray();
+        for (int line = 0; line < lines.length; line++) {
+            String currLine = (String) lines[line];
+            int start = 0;
 
-        for (int i = 0; i < fileContent.length(); i++) {
-            char c = fileContent.charAt(i);
-                if ((int) c > (int) ' ') {
-                    column++;
-                    continue;
-                }
-                if (start == i) {
-                    start = i + 1;
-                    column++;
-                    continue;
-                }
+            for (int col = 0; col < currLine.length(); col++) {
+                if(col != currLine.length() - 1){
+                    if (currLine.charAt(col) > ' ') continue;
+                    if (start == col) continue;
+                }else col++;
 
-            String value = fileContent.substring(start, i);
-            try{
-                tokens.add(new Token(new Location(filePath, line+1, column+1), Integer.parseInt(value)));
-            }catch (NumberFormatException ignored){
-                tokens.add(new Token(new Location(filePath, line+1, column+1), value));
+                String value = currLine.substring(start, col);
+                try{
+                    tokens.add(new Token(new Location(filePath, line+1, col+1), Integer.parseInt(value)));
+                }catch (NumberFormatException ignored){
+                    tokens.add(new Token(new Location(filePath, line+1, col+1), value));
+                }
+                start = col + 1;
             }
-            if (c == '\n' || c == '\r') {
-                line++;
-                column = 0;
-            }
-            start = i+1;
         }
         return tokens;
     }
