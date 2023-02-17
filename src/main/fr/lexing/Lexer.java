@@ -33,16 +33,13 @@ public class Lexer {
         for (int i = 0; i < fileContent.length(); i++) {
             char c = fileContent.charAt(i);
             if(i < fileContent.length() - 1){
-                if (c == '\n') {
-                    line++;
-                    column = 0;
-                }
                 if ((int) c > (int) ' ') {
                     column++;
                     continue;
                 }
-                if (start == i - 1) {
-                    start = ++i;
+                if (start == i) {
+                    start = i + 1;
+                    column++;
                     continue;
                 }
             }else{
@@ -51,11 +48,15 @@ public class Lexer {
 
             String value = fileContent.substring(start, i);
             try{
-                tokens.add(new Token(new Location(filePath, line, column), Integer.parseInt(value)));
+                tokens.add(new Token(new Location(filePath, line+1, column+1), Integer.parseInt(value)));
             }catch (NumberFormatException ignored){
-                tokens.add(new Token(new Location(filePath, line, column), value));
+                tokens.add(new Token(new Location(filePath, line+1, column+1), value));
             }
-            start = ++i;
+            if (c == '\n' || c == '\r') {
+                line++;
+                column = 0;
+            }
+            start = i+1;
         }
         return tokens;
     }

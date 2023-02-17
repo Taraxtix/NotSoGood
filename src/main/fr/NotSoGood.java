@@ -10,7 +10,7 @@ public class NotSoGood {
 
     private static void usage() {
         System.err.println("""
-                            Usage: java src/NotSoGood <command> <filename>
+                            Usage: java NotSoGood <command> <filename>
                             \tCommands :
                             \tsim\t\tSimulate the program
                             \tcom\t\tCompile the program
@@ -22,19 +22,22 @@ public class NotSoGood {
             usage();
             exit(1);
         }
-        String option = args[0];
-        String program_path = args[1];
-        if (!program_path.endsWith(".nsg")){
+
+        String command = args[0];
+        String filename = args[1];
+
+        if (!filename.endsWith(".nsg")){
             System.out.println("[ERROR]: The program path provided did not use the correct extension.");
             exit(1);
         }
-        String fileBaseName = program_path.replace(".nsg", "");
+        String fileBaseName = filename.replace(".nsg", "");
 
-        Program program = Lexer.lex_file(program_path);
-        if (option.equals("sim")) {
+        Program program = Lexer.lex_file(filename);
+
+        if (command.equals("sim")) {
             program.simulate();
-        } else if (option.contains("com")) {
-            program.compile(program_path);
+        } else if (command.contains("com")) {
+            program.compile(fileBaseName + ".asm");
             ProcessBuilder processBuilder = new ProcessBuilder();
             try {
                 processBuilder.command("bash", "-c", "nasm -f elf64 -o "+ fileBaseName +".o "+ fileBaseName +".asm").start();
