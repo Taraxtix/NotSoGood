@@ -18,12 +18,11 @@ public class Lexer {
 
         String fileContent = null;
         try{
-            fileContent = Files.readString(Path.of(filePath));
+            fileContent = Files.readString(Path.of(filePath)) + "\n";
         }catch (IOException e){
             System.err.println("[ERROR]: Cannot read " + filePath);
             exit(1);
         }
-        assert fileContent != null : "Unreachable";
 
         ArrayList<Token> tokens = new ArrayList<>();
         int line = 0;
@@ -32,7 +31,6 @@ public class Lexer {
 
         for (int i = 0; i < fileContent.length(); i++) {
             char c = fileContent.charAt(i);
-            if(i < fileContent.length() - 1){
                 if ((int) c > (int) ' ') {
                     column++;
                     continue;
@@ -42,9 +40,6 @@ public class Lexer {
                     column++;
                     continue;
                 }
-            }else{
-                i++;
-            }
 
             String value = fileContent.substring(start, i);
             try{
