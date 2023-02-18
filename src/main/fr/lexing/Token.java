@@ -1,7 +1,5 @@
 package main.fr.lexing;
 
-import main.fr.UnreachableCodeException;
-
 import static java.lang.System.exit;
 import static main.fr.lexing.TokenType.*;
 
@@ -22,7 +20,7 @@ public class Token {
         this.strValue = strValue;
     }
 
-    public String strValue() throws UnreachableCodeException {
+    public String strValue(){
         if(type != WORD){
             System.err.println(loc + " [ERROR]: Trying to get the " + WORD.argType() + "instead of a" + type.argType());
             exit(1);
@@ -35,7 +33,7 @@ public class Token {
         this.intValue = intValue;
     }
 
-    public int intValue() throws UnreachableCodeException {
+    public int intValue(){
         if(type != INT){
             System.err.println(loc + " [ERROR]: Trying to get the " + INT.argType() + "instead of a" + type.argType());
             exit(1);

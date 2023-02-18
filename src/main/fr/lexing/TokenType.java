@@ -1,12 +1,12 @@
 package main.fr.lexing;
 
-import main.fr.UnreachableCodeException;
+import static java.lang.System.exit;
 
 public enum TokenType {
     WORD,
     INT;
 
-    public String argType() throws UnreachableCodeException {
+    public String argType(){
         switch (this){
             case WORD -> {
                 return "string";
@@ -14,7 +14,8 @@ public enum TokenType {
             case INT -> {
                 return "integer";
             }
+            default -> exit(1);
         }
-        throw new UnreachableCodeException();
+        return null;
     }
 }

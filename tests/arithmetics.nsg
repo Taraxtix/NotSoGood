@@ -1,0 +1,11 @@
+// PLUS
+42 0 + print // 42
+34 35 + print // 69
+
+// MINUS
+69 27 - print // 42
+69 9 - print // 60
+
+// MULTIPLICATION
+0 69 * print // 0
+42 10 * print // 420
