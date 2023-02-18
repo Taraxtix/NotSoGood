@@ -32,8 +32,12 @@ public class Lexer {
 
             for (int col = 0; col < currLine.length(); col++) {
                 if(col != currLine.length() - 1){
-                    if (currLine.charAt(col) > ' ') continue;
-                    if (start == col) continue;
+                    if (currLine.charAt(col) == '/' && currLine.charAt(col+1) == '/') break;
+                    if ((int) currLine.charAt(col) > (int) ' ') continue;
+                    if (start == col) {
+                        start++;
+                        continue;
+                    }
                 }else col++;
 
                 String value = currLine.substring(start, col);
