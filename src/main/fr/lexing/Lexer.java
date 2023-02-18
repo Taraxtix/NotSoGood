@@ -1,7 +1,6 @@
 package main.fr.lexing;
 
 import main.fr.Program;
-import main.fr.UnreachableCodeException;
 import main.fr.op.Op;
 import main.fr.op.OpType;
 
@@ -52,8 +51,10 @@ public class Lexer {
         return tokens;
     }
 
-    private static ArrayList<Op> parseProgramFromTokens(ArrayList<Token> tokens) throws UnreachableCodeException {
+    private static ArrayList<Op> parseProgramFromTokens(ArrayList<Token> tokens){
+        assert TokenType.values().length == 2 : "Exhaustive handling of OpTypes";
         ArrayList<Op> ops = new ArrayList<>();
+
         for (Token token : tokens){
             if(token.type == TokenType.INT){
                 ops.add(new Op(token.loc, OpType.OP_PUSH, token.intValue()));
@@ -69,7 +70,7 @@ public class Lexer {
         return ops;
     }
 
-    public static Program lex_file(String program_path) throws UnreachableCodeException {
+    public static Program lex_file(String program_path){
 
         ArrayList<Token> tokens = parseTokenFromFile(program_path);
         ArrayList<Op> ops = parseProgramFromTokens(tokens);
