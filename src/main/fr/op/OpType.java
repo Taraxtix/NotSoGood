@@ -19,5 +19,8 @@ public enum OpType {
     OP_GREATER,
     OP_LESS_E,
     OP_GREATER_E,
+    OP_MEM,
+    OP_STORE8,
+    OP_LOAD8,
     OP_NONE
 }

@@ -10,10 +10,13 @@ import static java.lang.System.exit;
 
 public record Program(List<Op> ops) {
 
+    private static final int MEMORY_BUFFER = 64_000;
+
     public void crossReferencing(){
-        assert OpType.values().length == 19 : "Exhaustive handling of OpTypes";
+        assert OpType.values().length == 22 : "Exhaustive handling of OpTypes";
 
         Stack<Integer> stack = new Stack<>();
+
         for (int i = 0; i < ops().size(); i++) {
             Op op = ops.get(i);
             switch (op.type) {
@@ -38,9 +41,11 @@ public record Program(List<Op> ops) {
     }
 
     public void simulate(PrintStream out) {
-        assert OpType.values().length == 19 : "Exhaustive handling of OpTypes";
+        assert OpType.values().length == 22 : "Exhaustive handling of OpTypes";
 
         Stack<Integer> stack = new Stack<>();
+        byte[] memory = new byte[64_000];
+
         for (int i = 0; i < ops().size(); i++) {
             Op op = ops.get(i);
 
@@ -98,6 +103,14 @@ public record Program(List<Op> ops) {
                     int b = stack.pop();
                     int a = stack.pop();
                     stack.push(a >= b ? 1 : 0);
+                }case OP_MEM -> stack.push(4202496);
+                 case OP_STORE8 -> {
+                    int a = stack.pop();
+                    int b = stack.pop();
+                    memory[b - 4202496] = (byte) a;
+                }case OP_LOAD8 -> {
+                    int a = stack.pop();
+                    stack.push((int) memory[a - 4202496]);
                 }
                 default -> exit(1);
             }
@@ -105,12 +118,13 @@ public record Program(List<Op> ops) {
     }
 
     public void compile(String filepath) throws IOException {
-        assert OpType.values().length == 19 : "Exhaustive handling of OpTypes";
+        assert OpType.values().length == 22 : "Exhaustive handling of OpTypes";
 
         PrintWriter out = new PrintWriter(new FileWriter(filepath));
 
         out.println("""
                     global _start
+                    section .text
                     
                     print:
                         mov r8, -3689348814741910323
@@ -268,17 +282,38 @@ public record Program(List<Op> ops) {
                     out.println("    mov rbx, 1");
                     out.println("    cmovge rax, rbx");
                     out.println("    push rax");
+                }case OP_MEM -> {
+                    out.println("instruction_"+i+":");
+                    out.println("    ; -- MEM --");
+                    out.println("    lea rax, [mem]");
+                    out.println("    push rax");
+                }case OP_LOAD8 -> {
+                    out.println("instruction_"+i+":");
+                    out.println("    ; -- LOAD8 --");
+                    out.println("    pop rbx");
+                    out.println("    mov al, [rbx]");
+                    out.println("    movzx rax, al");
+                    out.println("    push rax");
+                }case OP_STORE8 -> {
+                    out.println("instruction_"+i+":");
+                    out.println("    ; -- STORE8 --");
+                    out.println("    pop rax");
+                    out.println("    pop rbx");
+                    out.println("    mov [rbx], al");
                 }
                 default -> exit(1);
             }
         }
 
-        out.println("\ninstruction_"+ops.size()+":");
+        out.println("instruction_"+ops.size()+":");
         out.println("""
                         mov rax, 60 ; system call for exit
                         mov rdi, 0 ; exit code 0
                         syscall ; invoke operating system to exit
                     """);
+
+        out.println("section .bss");
+        out.println("mem resb " + MEMORY_BUFFER);
 
         out.close();
     }

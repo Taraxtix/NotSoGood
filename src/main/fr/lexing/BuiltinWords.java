@@ -20,13 +20,16 @@ public enum BuiltinWords {
     GREATER(">", OpType.OP_GREATER),
     LESS_E("<=", OpType.OP_LESS_E),
     GREATER_E(">=", OpType.OP_GREATER_E),
+    MEM("mem", OpType.OP_MEM),
+    STORE("store8", OpType.OP_STORE8),
+    LOAD("load8", OpType.OP_LOAD8),
     NONE("", OpType.OP_NONE);
 
     public final String word;
     public final OpType opType;
 
     BuiltinWords(String word, OpType opType) {
-        assert OpType.values().length == 19 : "Exhaustive handling of OpTypes";
+        assert OpType.values().length == 22 : "Exhaustive handling of OpTypes";
 
         this.word = word;
         this.opType = opType;
