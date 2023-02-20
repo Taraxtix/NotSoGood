@@ -8,5 +8,16 @@ public enum OpType {
     OP_MUL,
     OP_DUP,
     OP_DROP,
+    OP_IF,
+    OP_ELSE,
+    OP_WHILE,
+    OP_DO,
+    OP_END,
+    OP_EQUAL,
+    OP_UNEQUAL,
+    OP_LESS,
+    OP_GREATER,
+    OP_LESS_E,
+    OP_GREATER_E,
     OP_NONE
 }

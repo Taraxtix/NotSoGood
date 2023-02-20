@@ -32,7 +32,7 @@ public class Lexer {
             for (int col = 0; col < currLine.length(); col++) {
                 if(col != currLine.length() - 1){
                     if (currLine.charAt(col) == '/' && currLine.charAt(col+1) == '/') break;
-                    if ((int) currLine.charAt(col) > (int) ' ') continue;
+                    if ((int)  currLine.charAt(col) > (int) ' ') continue;
                     if (start == col) {
                         start++;
                         continue;
@@ -74,7 +74,9 @@ public class Lexer {
 
         ArrayList<Token> tokens = parseTokenFromFile(program_path);
         ArrayList<Op> ops = parseProgramFromTokens(tokens);
-        return new Program(ops);
+        Program program = new Program(ops);
+        program.crossReferencing();
+        return program;
     }
 
 }

@@ -75,11 +75,11 @@ public class NotSoGood {
                     if (!file.getPath().endsWith(".nsg")) continue;
                     program = Lexer.lex_file(file.getPath());
 
-                    String recordPath = filename + "/record/" + file.getName().replace(".nsg", ".txt");
+                    String recordPath = filename + "record/" + file.getName().replace(".nsg", ".txt");
                     if (args.length >= 3 && args[2].equals("record")) {
-                        boolean ret = new File(filename + "/record/").mkdir();
+                        boolean ret = new File(filename + "record/").mkdir();
                         ret = ret && new File(recordPath).createNewFile();
-                        if(!ret) throw new IOException("Cannot create "+recordPath);
+                        if(ret) System.out.println("Created "+ recordPath);
 
                         program.simulate(new PrintStream(recordPath));
                         continue;

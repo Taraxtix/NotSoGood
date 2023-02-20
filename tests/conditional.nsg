@@ -1,0 +1,26 @@
+// EQUAL
+42 42 = print // 1
+42 69 = print // 0
+
+// UNEQUAL
+42 69 != print // 1
+42 42 != print // 0
+
+// GREATER
+69 42 > print // 1
+42 69 > print // 0
+
+// LESS
+42 69 < print // 1
+69 42 < print // 0
+
+// GREATER_E
+69 42 >= print // 1
+42 42 >= print // 1
+42 69 >= print // 0
+
+// LESS_E
+42 69 <= print // 1
+42 42 <= print // 1
+69 42 <= print // 0
+
