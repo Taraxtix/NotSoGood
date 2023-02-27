@@ -1,4 +1,4 @@
-package main.fr.lexing;
+package fr.main.lexing;
 
 public class Location {
     private final String filepath;

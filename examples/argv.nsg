@@ -1,0 +1,8 @@
+include "std.nsg"
+
+argv argc while dup 0 > do
+    swap dup strlen
+    over over swap STDOUT write drop '\n' putc
+    1 + +
+    swap 1 -
+end drop drop

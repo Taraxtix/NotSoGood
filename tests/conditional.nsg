@@ -1,26 +1,53 @@
-// EQUAL
+include "std.nsg"
+
+"Testing `EQUAL`:\n" puts
+
+"\nExpected : 1\nProvided : " puts
 42 42 = print // 1
+"\nExpected : 0\nProvided : " puts
 42 69 = print // 0
 
-// UNEQUAL
+"\n---------------------------------------\n" puts
+"Testing `UNEQUAL`:\n" puts
+
+"\nExpected : 1\nProvided : " puts
 42 69 != print // 1
+"\nExpected : 0\nProvided : " puts
 42 42 != print // 0
 
-// GREATER
+"\n---------------------------------------\n" puts
+"Testing `GREATER`:\n" puts
+
+"\nExpected : 1\nProvided : " puts
 69 42 > print // 1
+"\nExpected : 0\nProvided : " puts
 42 69 > print // 0
 
-// LESS
+"\n---------------------------------------\n" puts
+"Testing `LESS`:\n" puts
+
+"\nExpected : 1\nProvided : " puts
 42 69 < print // 1
+"\nExpected : 0\nProvided : " puts
 69 42 < print // 0
 
-// GREATER_E
+"\n---------------------------------------\n" puts
+"Testing `GREATER OR EQUAL`:\n" puts
+
+"\nExpected : 1\nProvided : " puts
 69 42 >= print // 1
+"\nExpected : 1\nProvided : " puts
 42 42 >= print // 1
+"\nExpected : 0\nProvided : " puts
 42 69 >= print // 0
 
-// LESS_E
+"\n---------------------------------------\n" puts
+"Testing `LESS OR EQUAL`:\n" puts
+
+"\nExpected : 1\nProvided : " puts
 42 69 <= print // 1
+"\nExpected : 1\nProvided : " puts
 42 42 <= print // 1
+"\nExpected : 0\nProvided : " puts
 69 42 <= print // 0
 

@@ -27,7 +27,7 @@ push(a)
 ```
 
 ### -- DROP --
-`drop` delete the value on top of the stack
+`drop` Delete the value on top of the stack
 ```
 pop()
 ```
@@ -35,7 +35,9 @@ pop()
 ### -- ARITHMETICS --
 
 #### -- PLUS --
-`+` Adds the two integers at the top of the stack and push the result 
+
+`+` Adds the two integers at the top of the stack and push the result
+
 ```
 int a = pop()
 int b = pop()
@@ -43,7 +45,9 @@ push(b + a)
 ```
 
 #### -- MINUS --
-`-` subtract the two integers at the top of the stack and push the result 
+
+`-` Subtract the two integers at the top of the stack and push the result
+
 ```
 int a = pop()
 int b = pop()
@@ -51,7 +55,9 @@ push(b - a)
 ```
 
 #### -- MULTIPLICATION --
-`*` multiply the two integers at the top of the stack and push the result 
+
+`*` Multiply the two integers at the top of the stack and push the result
+
 ```
 int a = pop()
 int b = pop()
@@ -118,7 +124,8 @@ else { push(0) }
 
 #### -- ELSE-LESS IF --
 
-`do` consume the value on the top of the stack (If it is false (0) it goes to the first instruction after the `end` keyword otherwise it go to the next instruction)
+`do` Consume the value on the top of the stack (If it is false (0) it goes to the first instruction after the `end`
+keyword otherwise it go to the next instruction)
 ```
 if cond do
     ...
@@ -127,8 +134,10 @@ end
 
 #### -- IF-ELSE --
 
-`do` consume the value on the top of the stack (If it is false (0) it goes to the first instruction after the `else` keyword otherwise it go to the next instruction)
+`do` Consume the value on the top of the stack (If it is false (0) it goes to the first instruction after the `else`
+keyword otherwise it go to the next instruction)
 `else` always jump to the first instruction after the `end` keyword
+
 ```
 if cond do
     ...
@@ -138,8 +147,11 @@ end
 ```
 
 #### -- WHILE --
-`do` consume the value on the top of the stack (If it is false (0) it goes to the first instruction after the `end` keyword otherwise it go to the next instruction)
+
+`do` Consume the value on the top of the stack (If it is false (0) it goes to the first instruction after the `end`
+keyword otherwise it go to the next instruction)
 `end` always jumps to the first instruction after the `while` keyword
+
 ```
 while cond do
     ...
@@ -149,10 +161,13 @@ end
 ### -- MEMORY MANAGEMENT --
 
 #### -- MEM --
-`mem` pushes the pointer to the start of the memory into the stack
+
+`mem` Pushes the pointer to the start of the memory into the stack
 
 #### -- STORE8 --
-`store8` stores a 8bit value
+
+`store8` Stores a 8bit value to a specific location of the memory
+
 ```
 int value = pop()
 int pointer = pop()
@@ -160,4 +175,10 @@ int pointer = pop()
 ```
 
 #### -- LOAD8 --
-`load8`
+
+`load8` Push the value at the given pointer to the stack
+
+```
+int pointer = pop()
+push(*pointer)
+```

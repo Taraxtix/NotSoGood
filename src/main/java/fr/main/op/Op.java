@@ -1,14 +1,15 @@
-package main.fr.op;
+package fr.main.op;
 
-import main.fr.lexing.Location;
+import fr.main.lexing.Location;
 
 public class Op {
 
     public final OpType type;
     public final Location loc;
     public int arg = 0;
+    public String strArg;
 
-    public Op(Location loc, OpType type){
+    public Op(Location loc, OpType type) {
         this.loc = loc;
         this.type = type;
     }
@@ -18,5 +19,8 @@ public class Op {
         this.arg = intValue;
     }
 
-
+    public Op(Location loc, OpType type, String strValue) {
+        this(loc, type);
+        this.strArg = strValue;
+    }
 }

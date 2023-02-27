@@ -1,4 +1,4 @@
-package main.fr.lexing;
+package fr.main.lexing;
 
 import static java.lang.System.exit;
 
@@ -7,10 +7,10 @@ public enum TokenType {
     INT,
     STRING;
 
-    public String argType(){
-        switch (this){
+    public String argType() {
+        switch (this) {
             case WORD -> {
-                return "string";
+                return "word";
             }
             case INT -> {
                 return "integer";

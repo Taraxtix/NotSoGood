@@ -1,0 +1,82 @@
+include "std.nsg"
+
+"Testing `OR`:\n" puts
+
+"\nExpected : 0\nProvided : " puts
+0  0  | print
+"\nExpected : 1\nProvided : " puts
+0  1  | print
+"\nExpected : 1\nProvided : " puts
+1  0  | print
+"\nExpected : 1\nProvided : " puts
+1  1  | print
+"\nExpected : 111\nProvided : " puts
+69 42 | print
+
+"\n---------------------------------------\n" puts
+"Testing `AND`:\n" puts
+
+"\nExpected : 0\nProvided : " puts
+0  0  & print
+"\nExpected : 0\nProvided : " puts
+0  1  & print
+"\nExpected : 0\nProvided : " puts
+1  0  & print
+"\nExpected : 1\nProvided : " puts
+1  1  & print
+"\nExpected : 0\nProvided : " puts
+69 42 & print
+
+"\n---------------------------------------\n" puts
+"Testing `BNOT` (With and as a mask):\n" puts
+
+"\nExpected : 255\nProvided : " puts
+0  b! 255 & print
+"\nExpected : 254\nProvided : " puts
+1  b! 255 & print
+"\nExpected : 186\nProvided : " puts
+69 b! 255 & print
+"\nExpected : 213\nProvided : " puts
+42 b! 255 & print
+
+"\n---------------------------------------\n" puts
+"Testing `NOT`:\n" puts
+
+"\nExpected : 0\nProvided : " puts
+1 1 = ! print
+"\nExpected : 1\nProvided : " puts
+0 1 = ! print
+
+"\n---------------------------------------\n" puts
+"Testing `XOR`:\n" puts
+
+"\nExpected : 0\nProvided : " puts
+0  0  xor print
+"\nExpected : 1\nProvided : " puts
+0  1  xor print
+"\nExpected : 1\nProvided : " puts
+1  0  xor print
+"\nExpected : 0\nProvided : " puts
+1  1  xor print
+"\nExpected : 111\nProvided : " puts
+69 42 xor print
+
+"\n---------------------------------------\n" puts
+"Testing `LSHIFT`:\n" puts
+
+"\nExpected : 0\nProvided : " puts
+0 2 << print
+"\nExpected : 4\nProvided : " puts
+1 2 << print
+"\nExpected : 16\nProvided : " puts
+1 4 << print
+
+"\n---------------------------------------\n" puts
+"Testing `RSHIFT`:\n" puts
+
+"\nExpected : 0\nProvided : " puts
+0  2 >> print
+"\nExpected : 1\nProvided : " puts
+4  2 >> print
+"\nExpected : 1\nProvided : " puts
+16 4 >> print

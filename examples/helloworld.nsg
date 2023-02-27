@@ -1,0 +1,3 @@
+include "std.nsg"
+
+"Hello World!\n" puts

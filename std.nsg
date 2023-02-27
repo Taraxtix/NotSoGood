@@ -1,0 +1,69 @@
+// STD_FILENO
+macro STDOUT 1 end
+macro STDERR 2 end
+
+// SYSCALL CODES
+macro SYS_READ 0 end
+macro SYS_WRITE 1 end
+macro SYS_EXIT 60 end
+
+// MOST USED SYSCALL
+macro read SYS_READ end
+macro write SYS_WRITE syscall3 end
+macro exit SYS_EXIT syscall1 drop end
+
+// STRING WRITING
+macro puts STDOUT write drop end
+macro eputs STDERR write drop end
+
+// CHARACTER WRITING
+func putc mem swap over load8
+    over mem swap store8
+    1 mem STDOUT write drop
+    swap drop store8
+end
+
+func eputc
+    mem swap over load8
+    over mem swap store8
+    1 mem STDERR write drop
+    swap drop store8
+end
+
+// INC/DEC
+macro inc8
+    dup load8 1 + store8
+end
+macro dec8
+    dup load8 1 + store8
+end
+
+macro inc16
+    dup load16 1 + store16
+end
+macro dec16
+    dup load16 1 + store16
+end
+
+macro inc32
+    dup load32 1 + store32
+end
+macro dec32
+    dup load32 1 + store32
+end
+
+macro inc64
+    dup load64 1 + store64
+end
+macro dec64
+    dup load64 1 + store64
+end
+
+//STRING FUNCTIONS
+macro strlen
+    0 swap
+    while dup load8 0 != do
+        1 +
+        swap 1 + swap
+    end drop
+end

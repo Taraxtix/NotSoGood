@@ -1,0 +1,20 @@
+include "std.nsg"
+
+"Testing `PUSH`:\n" puts
+
+"\nExpected : 42\nProvided : " puts
+42 print
+
+"\n---------------------------------------\n" puts
+"Testing `DUP`:\n" puts
+
+"\nExpected :\n69\n69\nProvided :\n" puts
+69 dup print
+       print
+
+"\n---------------------------------------\n" puts
+"Testing `DROP`:\n" puts
+
+"\nExpected :\n0\n1\nProvided :\n" puts
+1 0 0 drop print
+           print

@@ -1,0 +1,34 @@
+include "std.nsg"
+
+macro BOARD_SIZE 100 end
+macro BOARD mem 1 + end
+macro window mem end
+macro rule 110 end
+
+BOARD BOARD_SIZE 1 - + 1 store8
+
+0 while dup BOARD_SIZE < do
+    window
+    BOARD 0 + load8 2 <<
+    BOARD 1 + load8 1 << |
+    BOARD 2 + load8 0 << |
+    store8 // Storing the window
+
+    1 while dup BOARD_SIZE 1 - < do
+        window 2dup load8 1 <<
+        swap 1 + BOARD + load8 |
+        7 & 2dup store8 //updating the window
+
+        swap drop rule swap >> 1 &
+        over BOARD + swap store8 //Changing the board value in consequence
+
+        if dup BOARD + load8 1 = do
+            "*" puts
+        else
+            " " puts
+        end
+        1 +
+    end drop
+    '\n' putc
+    1 +
+end drop
