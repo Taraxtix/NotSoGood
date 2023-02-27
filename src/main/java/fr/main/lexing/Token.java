@@ -9,8 +9,8 @@ public class Token {
     public String strValue;
     public int intValue;
 
-    private Token(TokenType type, Location loc){
-        assert TokenType.values().length == 2 : "Exhaustive handling of TokenType";
+    private Token(TokenType type, Location loc) {
+        assert TokenType.values().length == 3 : "Exhaustive handling of TokenType";
         this.type = type;
         this.loc = loc;
     }
@@ -44,7 +44,7 @@ public class Token {
     @Override
     public String toString() {
         String value;
-        if(type == INT){
+        if (type == INT) {
              value = String.valueOf(intValue);
         }else{
             value = strValue;

@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import static java.lang.System.exit;
 
 public class Lexer {
+    private static final HashMap<String, List<Op>> functions = new HashMap<>();
+    private static final HashMap<String, List<Op>> macros = new HashMap<>();
+
     private static ArrayList<Token> parseTokenFromFile(String filePath) {
         assert TokenType.values().length == 2 : "Exhaustive handling of TokenType in compileContentToTokens";
         ArrayList<Token> tokens = new ArrayList<>();
@@ -37,7 +40,7 @@ public class Lexer {
                         start++;
                         continue;
                     }
-                }else col++;
+                } else col++;
 
                 String value = currLine.substring(start, col);
                 try{
@@ -51,8 +54,8 @@ public class Lexer {
         return tokens;
     }
 
-    private static ArrayList<Op> parseProgramFromTokens(ArrayList<Token> tokens){
-        assert TokenType.values().length == 2 : "Exhaustive handling of OpTypes";
+    private static Program parseProgramFromTokens(ArrayList<Token> tokens) {
+        assert TokenType.values().length == 3 : "Exhaustive handling of OpTypes";
         ArrayList<Op> ops = new ArrayList<>();
 
         for (Token token : tokens){

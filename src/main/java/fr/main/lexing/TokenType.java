@@ -4,7 +4,8 @@ import static java.lang.System.exit;
 
 public enum TokenType {
     WORD,
-    INT;
+    INT,
+    STRING;
 
     public String argType(){
         switch (this){
@@ -13,6 +14,9 @@ public enum TokenType {
             }
             case INT -> {
                 return "integer";
+            }
+            case STRING -> {
+                return "string";
             }
             default -> exit(1);
         }
